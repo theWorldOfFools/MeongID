@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.env
+*.log
+
+# Foto upload (fisik) tidak ikut ke git
+backend/uploads/
+uploads/

@@ -1,0 +1,59 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: meongid-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:-meong}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-meong123}
+      POSTGRES_DB: ${DB_NAME:-meongid}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-meong} -d ${DB_NAME:-meongid}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    container_name: meongid-backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://${DB_USER:-meong}:${DB_PASSWORD:-meong123}@db:5432/${DB_NAME:-meongid}
+      JWT_SECRET: ${JWT_SECRET:-ganti-rahasia-ini-di-production}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-30d}
+      PORT: 3001
+      UPLOAD_DIR: /app/uploads
+      SEED_DEMO_EMAIL: ${SEED_DEMO_EMAIL:-demo@meong.test}
+      SEED_DEMO_PASSWORD: ${SEED_DEMO_PASSWORD:-meong123}
+    ports:
+      - "3001:3001"
+    volumes:
+      # Migrasi SQL ikut terbaca saat dev tanpa rebuild.
+      - ./db:/app/db:ro
+      # Foto hewan & galeri persisten di volume.
+      - uploads:/app/uploads
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # Kosong = API satu origin: nginx mem-proxy /api & /uploads ke backend.
+        # Cocok untuk lokal (http://localhost:5173) maupun tunnel (ngrok) tanpa ubah apa pun.
+        VITE_API_URL: ${VITE_API_URL:-}
+    container_name: meongid-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
+
+volumes:
+  pgdata:
+  uploads:
