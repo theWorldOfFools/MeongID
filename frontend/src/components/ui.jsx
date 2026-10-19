@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
 import { cn } from './cn';
 
-/** Wadah halaman responsif & ramah ibu jari. */
+/** Wadah halaman: penuh lebar layar & ramah ibu jari. */
 export function Wadah({ className, children }) {
-  return <div className={cn('mx-auto w-full max-w-[680px] p-3.5 sm:p-6 pb-safe space-y-4', className)}>{children}</div>;
+  return <div className={cn('w-full p-3.5 sm:p-6 lg:px-8 pb-safe space-y-4', className)}>{children}</div>;
 }
 
 /** Kartu lembut khas MeongID. */

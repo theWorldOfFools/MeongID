@@ -11,7 +11,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-30 border-b border-meong-line/70 bg-meong-bg/85 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-[680px] items-center justify-between gap-3 px-3.5 sm:px-6">
+      <div className="flex h-16 w-full items-center justify-between gap-3 px-3.5 sm:px-6 lg:px-8">
         <Link to="/beranda" className="flex items-center gap-2.5" aria-label="MeongID Beranda">
           <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-meong-peach text-meong-primaryDark shadow-card">
             <PawPrint size={20} strokeWidth={2.4} />
