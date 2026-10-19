@@ -1,0 +1,47 @@
+{
+  "id": "/",
+  "name": "MeongID — Teman Harian Pet Parents",
+  "short_name": "MeongID",
+  "description": "Profil hewan, pengingat pintar, paspor QR darurat, catatan pengeluaran, dan jurnal tumbuh kembang.",
+  "lang": "id",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FFFBF7",
+  "theme_color": "#FFF6EC",
+  "categories": ["lifestyle", "utilities"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Pengingat",
+      "short_name": "Pengingat",
+      "url": "/pengingat",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Catat pengeluaran",
+      "short_name": "Pengeluaran",
+      "url": "/pengeluaran",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

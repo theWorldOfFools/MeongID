@@ -12,6 +12,8 @@ Aplikasi manajemen hewan peliharaan harian yang imut, fungsional, dan siap dikem
 
 **Freemium (sesuai strategi bisnis):** paket Gratis maksimal 2 hewan; Premium (simulasi demo di halaman Pengaturan, tanpa payment gateway) membuka hewan tanpa batas.
 
+**PWA (mobile & desktop):** MeongID bisa dipasang sebagai aplikasi di Android, iOS (Safari → Tambah ke Layar Utama), dan Chrome/Edge desktop — layar penuh tanpa browser, ikon sendiri, shortcut cepat (Pengingat & Pengeluaran), plus app-shell offline dasar lewat service worker. Tombol "Pasang aplikasi" tersedia di halaman Pengaturan.
+
 ## 🎨 Design System
 
 - **Vibe:** *Cute yet Clean* — palet pastel hangat (soft peach `#FFDCC9`, warm cream, dusty rose, soft lavender, mint) dengan latar off-white.

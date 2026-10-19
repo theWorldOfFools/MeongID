@@ -4,6 +4,7 @@ import { LogOut, PawPrint, Save, Sparkles } from 'lucide-react';
 import api, { pesanError } from '../api/client';
 import { useAuth } from '../context/AuthContext';
 import { Card, Notice, PageHeader, StatusBadge, Wadah } from '../components/ui';
+import PwaPasang from '../components/PwaPasang';
 
 const FITUR_PREMIUM = ['Profil hewan tanpa batas', 'Ekspor laporan keuangan bulanan', 'Galeri resolusi tinggi tanpa batas'];
 const FITUR_FREE = ['Maksimal 2 profil hewan', 'Pengingat & paspor QR standar', 'Pencatatan pengeluaran dasar'];
@@ -108,6 +109,8 @@ export default function Pengaturan() {
           </>
         )}
       </Card>
+
+      <PwaPasang />
 
       <Card className="flex items-center gap-3 p-4">
         <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-meong-peachSoft text-meong-primaryDark">
