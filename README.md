@@ -53,7 +53,7 @@ docker compose up -d --build
 ```
 
 - Aplikasi: <http://localhost:5173>
-- API: <http://localhost:3001> (health: `/health`)
+- API: <http://localhost:3005> (health: `/health`)
 - PostgreSQL: `localhost:5434`
 
 Migrasi + seed otomatis berjalan saat container backend start.
@@ -70,7 +70,7 @@ docker compose up -d db
 cd backend && cp ../.env.example .env   # sesuaikan DATABASE_URL ke localhost:5434
 npm install && npm run migrate && npm run seed && npm run dev
 
-# 3) Frontend (proxy /api & /uploads otomatis ke localhost:3001)
+# 3) Frontend (proxy /api & /uploads otomatis ke localhost:3005)
 cd frontend && npm install && npm run dev
 ```
 

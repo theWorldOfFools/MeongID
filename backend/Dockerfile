@@ -3,6 +3,6 @@ WORKDIR /app
 COPY package.json ./
 RUN npm install --omit=dev
 COPY src ./src
-ENV PORT=3001
-EXPOSE 3001
+ENV PORT=3005
+EXPOSE 3005
 CMD ["sh", "-c", "npm run migrate && npm run seed && npm start"]

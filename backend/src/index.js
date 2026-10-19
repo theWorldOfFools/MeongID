@@ -42,7 +42,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ pesan: 'Terjadi kesalahan di server.' });
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3005;
 if (require.main === module) {
   app.listen(PORT, () => console.log(`[MeongID] backend jalan di :${PORT}`));
 }

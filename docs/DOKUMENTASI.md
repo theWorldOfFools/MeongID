@@ -133,7 +133,7 @@ desktop 1440×900) — lihat [cara mengambil ulang](#143-mengambil-ulang-tangkap
                          Docker network (meongid_default)
  ┌────────────┐   HTTP    ┌───────────────────────┐   /api/*    ┌─────────────────┐   SQL   ┌──────────────┐
  │  Browser    │ ────────▶ │  nginx (frontend)     │ ──────────▶ │  Express 4      │ ──────▶ │ PostgreSQL 16│
- │  (PWA)      │           │  :80 → host :5173     │             │  :3001          │         │  container   │
+  │  (PWA)      │           │  :80 → host :5173     │             │  :3005          │         │  container   │
  └────────────┘           │  - SPA fallback       │   /uploads  │  - migrasi+seed │         └──────────────┘
                           │  - proxy /api,/uploads│ ──────────▶ │  - JWT + REST   │         volume: pgdata
                           └───────────────────────┘             │  - upload foto  │
@@ -141,7 +141,7 @@ desktop 1440×900) — lihat [cara mengambil ulang](#143-mengambil-ulang-tangkap
                                 + manifest + sw.js                    volume: uploads
 ```
 
-- **API satu origin.** `VITE_API_URL` default kosong → frontend memanggil `/api/...` di origin yang sama. Di Docker, nginx mem-proxy ke `backend:3001`; di dev, Vite dev server yang mem-proxy. Efeknya: aplikasi jalan apa adanya di `localhost` maupun via tunnel (ngrok) tanpa ubah konfigurasi.
+- **API satu origin.** `VITE_API_URL` default kosong → frontend memanggil `/api/...` di origin yang sama. Di Docker, nginx mem-proxy ke `backend:3005`; di dev, Vite dev server yang mem-proxy. Efeknya: aplikasi jalan apa adanya di `localhost` maupun via tunnel (ngrok) tanpa ubah konfigurasi.
 - **Tanpa ORM.** Backend memakai `pg` + file SQL migrasi berurutan di `db/migrations/`, dijalankan otomatis setiap backend start (idempoten), lalu seed demo (idempoten, hanya jika akun demo belum ada).
 - **Data terpisah dari container.** PostgreSQL → volume `pgdata`; file foto → volume `uploads`. Backend di-restart/build tanpa kehilangan data.
 
@@ -373,7 +373,7 @@ MeongID/
 
 ```bash
 docker compose up -d --build     # build & jalankan db + backend + frontend
-# buka http://localhost:5173     (api: :3001, postgres: :5434)
+# buka http://localhost:5173     (api: :3005, postgres: :5434)
 docker compose down              # stop (data tetap tersimpan di volume)
 docker compose down -v           # stop + hapus volume (reset total, seed ulang)
 ```
@@ -385,8 +385,8 @@ belum ada. Login demo: `demo@meong.test` / `meong123`.
 
 ```bash
 docker compose up -d db                                  # db saja
-cd backend  && npm install && npm run dev                # :3001
-cd frontend && npm install && npm run dev                # :5173 (proxy /api ke :3001)
+cd backend  && npm install && npm run dev                # :3005
+cd frontend && npm install && npm run dev                # :5173 (proxy /api ke :3005)
 ```
 
 ### 12.3 Mencoba di HP
@@ -431,7 +431,7 @@ Hasil terakhir: **40/40 lulus**.
 3. Detail Mochi → tab Berat → grafik 6 titik; tab Galeri → 3 foto.
 4. Paspor → QR → buka tautan di jendela incognito → halaman publik tampil tanpa login.
 5. Pengaturan → "Pasang aplikasi" (Chrome/Edge) atau panduan iOS.
-6. `curl -s http://localhost:3001/health` → `{"status":"sehat","aplikasi":"MeongID"}`.
+6. `curl -s http://localhost:3005/health` → `{"status":"sehat","aplikasi":"MeongID"}`.
 
 ### 14.3 Mengambil ulang tangkapan layar
 

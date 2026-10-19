@@ -8,8 +8,8 @@ export default defineConfig({
     host: true,
     // Dev lokal tanpa Docker: API & foto diteruskan ke backend Express.
     proxy: {
-      '/api': 'http://localhost:3001',
-      '/uploads': 'http://localhost:3001',
+      '/api': 'http://localhost:3005',
+      '/uploads': 'http://localhost:3005',
     },
   },
   preview: { port: 80, host: true },

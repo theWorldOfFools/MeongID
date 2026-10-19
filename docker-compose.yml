@@ -28,12 +28,12 @@ services:
       DATABASE_URL: postgres://${DB_USER:-meong}:${DB_PASSWORD:-meong123}@db:5432/${DB_NAME:-meongid}
       JWT_SECRET: ${JWT_SECRET:-ganti-rahasia-ini-di-production}
       JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-30d}
-      PORT: 3001
+      PORT: 3005
       UPLOAD_DIR: /app/uploads
       SEED_DEMO_EMAIL: ${SEED_DEMO_EMAIL:-demo@meong.test}
       SEED_DEMO_PASSWORD: ${SEED_DEMO_PASSWORD:-meong123}
     ports:
-      - "3001:3001"
+      - "3005:3005"
     volumes:
       # Migrasi SQL ikut terbaca saat dev tanpa rebuild.
       - ./db:/app/db:ro
