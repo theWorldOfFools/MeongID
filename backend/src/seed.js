@@ -62,6 +62,42 @@ async function seed() {
       [uid, petId]
     );
 
+    const { rows: pet2 } = await pool.query(
+      `INSERT INTO pets (user_id, nama, spesies, ras, tanggal_lahir, jenis_kelamin,
+                         berat_badan_kg, golongan_darah, alergi, nomor_cip, catatan_darurat)
+       VALUES ($1, 'Oreo', 'Anjing', 'Beagle', '2022-11-02', 'jantan',
+               12.50, 'DEA 1.1+', 'Alergi ayam & tungau debu', 'OREO-777',
+               'Sangat ramah tapi jago kabur kalau pintu terbuka. Bila ketemu, hubungi pemilik ya.')
+       RETURNING id`,
+      [uid]
+    );
+    const oreoId = pet2[0].id;
+
+    await pool.query(
+      `INSERT INTO weight_logs (pet_id, user_id, berat_kg, tanggal, catatan) VALUES
+         ($1,$2,11.80, CURRENT_DATE - 120, 'Timbang bulanan'),
+         ($1,$2,12.00, CURRENT_DATE - 80, 'Timbang bulanan'),
+         ($1,$2,12.30, CURRENT_DATE - 40, 'Setelah rutin jalan pagi'),
+         ($1,$2,12.50, CURRENT_DATE - 7, 'Timbang bulanan')`,
+      [oreoId, uid]
+    );
+
+    await pool.query(
+      `INSERT INTO reminders (pet_id, user_id, judul, jenis, tanggal_jadwal, ulang_hari, catatan) VALUES
+         ($1,$2,'Vaksin rabies tahunan','vaksin', CURRENT_DATE + 30, 365, 'Bawa buku vaksin warna biru'),
+         ($1,$2,'Obat kutu & caplak','obat_kutu', CURRENT_DATE + 10, 30, 'Tablet kunyah rasa daging'),
+         ($1,$2,'Grooming & mandi','grooming', CURRENT_DATE + 5, 60, 'Pesan slot pagi biar tidak antre')`,
+      [oreoId, uid]
+    );
+
+    await pool.query(
+      `INSERT INTO expenses (user_id, pet_id, kategori, keterangan, jumlah, tanggal) VALUES
+         ($1,$2,'makanan','Royal Canin Beagle 3 kg', 260000, CURRENT_DATE - 6),
+         ($1,$2,'medis_vaksin','Vaksin rabies + konsultasi dokter', 275000, CURRENT_DATE - 15),
+         ($1,$2,'grooming','Mandi & potong kuku', 120000, CURRENT_DATE - 1)`,
+      [uid, oreoId]
+    );
+
     console.log(`[seed] akun demo siap: ${email} / ${password}`);
   } catch (e) {
     console.error('[seed] GAGAL', e.message);

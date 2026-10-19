@@ -12,7 +12,7 @@ export default function BottomNav() {
       aria-label="Navigasi bawah"
     >
       <div className="px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-        <div className="pointer-events-auto mx-auto flex max-w-md items-stretch gap-0.5 rounded-3xl border border-meong-line bg-white/95 px-1.5 py-1.5 shadow-pop backdrop-blur-md">
+        <div className="pointer-events-auto mx-auto flex max-w-md items-stretch gap-0.5 rounded-3xl border border-meong-line bg-white/95 px-1 py-1.5 shadow-pop backdrop-blur-md">
           {MENU.map((m) => {
             const aktif = menuAktif(pathname, m.ke);
             return (
@@ -20,7 +20,7 @@ export default function BottomNav() {
                 <motion.span
                   whileTap={{ scale: 0.92 }}
                   className={cn(
-                    'relative flex min-h-[52px] flex-col items-center justify-center gap-0.5 rounded-2xl px-1 py-2 text-[10.5px] font-bold transition-colors',
+                    'relative flex min-h-[52px] flex-col items-center justify-center gap-0.5 rounded-2xl px-0.5 py-2 text-[10px] font-bold tracking-tight transition-colors',
                     aktif ? 'text-meong-primaryDark' : 'text-meong-muted'
                   )}
                 >

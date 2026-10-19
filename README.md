@@ -2,6 +2,8 @@
 
 Aplikasi manajemen hewan peliharaan harian yang imut, fungsional, dan siap dikembangkan. MeongID membantu *pet parents* mengelola kebutuhan hewan kesayangan: profil terpadu, pengingat pintar, paspor QR darurat, catatan pengeluaran, dan jurnal tumbuh kembang.
 
+📖 **Dokumentasi end-to-end** (arsitektur, alur pengguna, skema database, referensi API, cara menjalankan & verifikasi): [`docs/DOKUMENTASI.md`](docs/DOKUMENTASI.md)
+
 ## ✨ Fitur v1
 
 1. **Profil Hewan Terpadu** — data dasar (nama, spesies/ras, tanggal lahir, jenis kelamin), data fisik & medis (berat, golongan darah, alergi, nomor cip/stambuk), foto profil.
@@ -13,6 +15,18 @@ Aplikasi manajemen hewan peliharaan harian yang imut, fungsional, dan siap dikem
 **Freemium (sesuai strategi bisnis):** paket Gratis maksimal 2 hewan; Premium (simulasi demo di halaman Pengaturan, tanpa payment gateway) membuka hewan tanpa batas.
 
 **PWA (mobile & desktop):** MeongID bisa dipasang sebagai aplikasi di Android, iOS (Safari → Tambah ke Layar Utama), dan Chrome/Edge desktop — layar penuh tanpa browser, ikon sendiri, shortcut cepat (Pengingat & Pengeluaran), plus app-shell offline dasar lewat service worker. Tombol "Pasang aplikasi" tersedia di halaman Pengaturan.
+
+## 📸 Tangkapan Layar
+
+| Masuk | Beranda | Detail hewan | Paspor QR |
+| --- | --- | --- | --- |
+| <img src="docs/screenshots/masuk.png" width="220" alt="Halaman masuk"> | <img src="docs/screenshots/beranda.png" width="220" alt="Beranda"> | <img src="docs/screenshots/hewan-profil.png" width="220" alt="Detail hewan"> | <img src="docs/screenshots/hewan-paspor-qr.png" width="220" alt="QR paspor"> |
+
+| Grafik berat | Galeri | Pengeluaran | Paspor publik |
+| --- | --- | --- | --- |
+| <img src="docs/screenshots/hewan-berat.png" width="220" alt="Grafik berat"> | <img src="docs/screenshots/hewan-galeri.png" width="220" alt="Galeri"> | <img src="docs/screenshots/pengeluaran.png" width="220" alt="Pengeluaran"> | <img src="docs/screenshots/paspor-publik.png" width="220" alt="Paspor publik"> |
+
+Tampilan desktop & halaman lainnya: [`docs/screenshots/`](docs/screenshots) — semua terangkum di [dokumentasi §3](docs/DOKUMENTASI.md#3-tangkapan-layar).
 
 ## 🎨 Design System
 
@@ -44,7 +58,7 @@ docker compose up -d --build
 
 Migrasi + seed otomatis berjalan saat container backend start.
 
-**Akun demo:** `demo@meong.test` / `meong123` (ada tombol isi otomatis di halaman masuk) berisi Mochi 🐱 lengkap dengan pengingat, pengeluaran, dan 6 catatan berat.
+**Akun demo:** `demo@meong.test` / `meong123` (ada tombol isi otomatis di halaman masuk) berisi 2 hewan — **Mochi 🐱** (Persia) dan **Oreo 🐶** (Beagle) — lengkap dengan pengingat (termasuk 1 terlambat), pengeluaran, dan riwayat berat.
 
 ### Pengembangan lokal (tanpa Docker)
 
@@ -76,6 +90,10 @@ frontend/src/
   pages/              # beranda, hewan, detail (4 tab), pengingat, pengeluaran, pengaturan, paspor
   data/kategori.js    # enum bersama (kategori, jenis, spesies)
   utils/format.js     # rupiah, tanggal Indonesia, usia, label jadwal
+docs/
+  DOKUMENTASI.md      # dokumentasi end-to-end (arsitektur, API, pengujian)
+  screenshots/        # tangkapan layar mobile & desktop
+  ambil-screenshot.mjs# skrip Playwright untuk regenerate screenshot
 ```
 
 ## 🔌 Ringkasan API
